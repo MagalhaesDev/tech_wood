@@ -10,7 +10,8 @@ import {
 import { FilterActive } from "./components/FilterActive";
 import { DialogNewActive } from "./components/DialogNewActive";
 import { EditActive } from "./components/EditActive";
-import { InformationActive } from "./components/InformationActive";
+import { NavLink } from "react-router-dom";
+import { Info } from "lucide-react";
 
 export function Invetory() {
   return (
@@ -30,7 +31,7 @@ export function Invetory() {
         </div>
       </div>
       <Table className="mt-1">
-        <TableCaption>Lista invetário de ativos fixos</TableCaption>
+        <TableCaption>Lista inventário de ativos fixos</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px] text-white">Categoria</TableHead>
@@ -50,7 +51,12 @@ export function Invetory() {
             <TableCell className="text-right">$250.00</TableCell>
             <TableCell className="flex justify-end gap-3">
               <EditActive />
-              <InformationActive />
+              <NavLink
+                className="hover:text-green-700 transition ease-in 1s"
+                to="/active"
+              >
+                <Info width={18} />
+              </NavLink>
             </TableCell>
           </TableRow>
         </TableBody>
