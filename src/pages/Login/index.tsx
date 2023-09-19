@@ -66,7 +66,7 @@ export function Login () {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">
+                <Button type="submit" className='text-zinc-100 hover:bg-[#16a34a] transition'>
                     Login
                     <ChevronRight className="w-4 h-4"/>
                 </Button>
