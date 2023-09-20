@@ -1,12 +1,10 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Filter } from "lucide-react";
+import { ItemDropDown } from "./ItemDropDown";
 
 export function FilterActive() {
   return (
@@ -16,12 +14,9 @@ export function FilterActive() {
         <Filter width={16} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Filtrar por:</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">Localização</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">Data compra</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">Categoria</DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">Vida útil</DropdownMenuItem>
+        <ItemDropDown type="Categoria"/>
+        <ItemDropDown type="Localização"/>
+        <ItemDropDown type="Data de compra"/>
       </DropdownMenuContent>
     </DropdownMenu>
   );

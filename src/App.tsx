@@ -1,12 +1,13 @@
-import { BrowserRouter } from 'react-router-dom'
-import { Router } from './Router'
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./Router";
+import { ActivesContextProvider } from "./contexts/ActivesContext";
 
 export function App() {
   return (
-      <BrowserRouter>
-          <Router />
-      </BrowserRouter>
-  )
+    <BrowserRouter>
+      <ActivesContextProvider>
+        <Router />
+      </ActivesContextProvider>
+    </BrowserRouter>
+  );
 }
-
-

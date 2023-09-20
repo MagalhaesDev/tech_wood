@@ -7,13 +7,15 @@ import { Invetory } from './pages/Invetory'
 import { Active } from './pages/Invetory/components/Active'
 
 export function Router() {
+
+
   return (
     <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<Home/>} />
           <Route path="/inventario" element={<Invetory />} />
-          <Route path="/active" element={<Active />} />
+          <Route path="/active/:id" element={<Active />} />
           <Route path="/graficos" element={<Graphics />} />
         </Route>
     </Routes>
