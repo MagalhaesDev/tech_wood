@@ -7,7 +7,7 @@ export interface Actives {
     locale: string,
     date_buy: string,
     value_buy: string,
-    nf?: number,
+    nf: number,
     rate: number,
     description: string,
     provider: string,
