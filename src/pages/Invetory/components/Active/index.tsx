@@ -10,29 +10,38 @@ import { api } from "@/services/api";
 export function Active() {
   const navigate = useNavigate();
   const params = useParams();
-  const [active,setActives] = useState<Actives>();
+  const [active, setActives] = useState<Actives>();
   useEffect(() => {
-      api.get(`http://localhost:3000/actives/${params.id}`).then((response) => setActives(response.data))
-  },[]);
+    api
+      .get(`http://localhost:3000/actives/${params.id}`)
+      .then((response) => {
+        setActives(response.data);
+      })
+      .catch(() => {
+        navigate("/actives");
+      });
+  }, [params.id, navigate]);
 
   return (
     <main className="mx-[10rem]">
       <div className="flex items-center justify-between">
         <button onClick={() => navigate(-1)}>
-          <ArrowLeftToLine width={48} strokeWidth={3} className="text-green-700 transition ease-in cursor-pointer hover:text-white"/>
+          <ArrowLeftToLine
+            width={48}
+            strokeWidth={3}
+            className="text-green-700 transition ease-in cursor-pointer hover:text-white"
+          />
         </button>
         <h2 className="text-2xl center my-5 text-white font-bold">
           {active?.description}
         </h2>
         <Button className="font-bold text-zinc-100 flex items-center justify-center gap-1">
           QRCODE
-          <QrCode  width={18} strokeWidth={3}/>
+          <QrCode width={18} strokeWidth={3} />
         </Button>
       </div>
-      <Separator className="h-[2px] mb-5 bg-zinc-700"/>
-      <h3 className=" font-bold text-lg text-zinc-300 ">
-        Informações:
-      </h3>
+      <Separator className="h-[2px] mb-5 bg-zinc-700" />
+      <h3 className=" font-bold text-lg text-zinc-300 ">Informações:</h3>
       <ul className="grid grid-cols-3  justify-center items-center  px-3 rounded-md bg-zinc-900">
         <ActiveList title="Categoria:" description="Informatica" />
         <ActiveList title="Data aquisição:" description="23/07/2023" />
@@ -45,11 +54,9 @@ export function Active() {
         <ActiveList title="Valor residual:" description="R$500,00" />
       </ul>
 
-      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700"/>
+      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700" />
 
-      <h3 className=" font-bold text-lg text-zinc-300 mt-5">
-        Quantidade de:
-      </h3>
+      <h3 className=" font-bold text-lg text-zinc-300 mt-5">Quantidade de:</h3>
 
       <ul className="grid grid-cols-3  justify-center items-center  px-3 rounded-md bg-zinc-900">
         <ActiveList title="Itens do fornecedor:" description="21" />
@@ -57,24 +64,24 @@ export function Active() {
         <ActiveList title="Manutenção:" description="2" />
       </ul>
 
-      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700"/>
+      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700" />
 
       <h3 className="font-bold text-lg text-zinc-300 mt-5">
         Histórico de Manutenção:
       </h3>
       <div className="flex flex-col gap-4 text-zinc-400 text-lg justify-center items-center  p-5 rounded-md bg-zinc-900">
-       <Wrench/>
-       <p>Não há nenhuma manutenção</p>
+        <Wrench />
+        <p>Não há nenhuma manutenção</p>
       </div>
 
-      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700"/>
+      <Separator className="my-4 h-[1px] mb-5 bg-zinc-700" />
 
       <h3 className="font-bold text-lg text-zinc-300 mt-5">
         Histórico de Movimentação:
       </h3>
       <div className="flex flex-col gap-4 text-zinc-400 text-lg justify-center items-center  p-5 rounded-md bg-zinc-900">
-       <BadgeInfo />
-       <p>Não há nenhuma movimentação</p>
+        <BadgeInfo />
+        <p>Não há nenhuma movimentação</p>
       </div>
     </main>
   );

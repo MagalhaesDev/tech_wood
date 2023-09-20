@@ -7,13 +7,31 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { FileEdit } from "lucide-react";
-import { InputDialog } from "../InputDialog";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Actives } from "@/contexts/ActivesContext";
+import { api } from "@/services/api";
+import { EditInputDialog } from "./EditInputDialog";
 
-export function EditActive() {
+interface EditActiveProps {
+  id: string
+}
+
+export function EditActive({id}: EditActiveProps) {
   const form = useForm();
+  const [active, setActives] = useState<Actives>();
+  useEffect(() => {
+    api
+      .get(`http://localhost:3000/actives/${id}`)
+      .then((response) => {
+        setActives(response.data);
+      })
+
+  }, []);
+
+  if(!active) return;
 
   return (
     <Sheet>
@@ -30,16 +48,11 @@ export function EditActive() {
         <Form {...form}>
           <form className="flex flex-col gap-5">
             <div>
-              <InputDialog nameInput="category" label="Categoria" />
-              <InputDialog nameInput="description" label="Descrição" />
-              <InputDialog nameInput="value_buy" label="Valor compra" />
-              <InputDialog nameInput="supplier" label="Fornecedor" />
-              <InputDialog
-                nameInput="depreciation"
-                label="Taxa de depreciação"
-              />
-              <InputDialog nameInput="locale" label="Localização" />
-
+              <EditInputDialog label="Descrição" item={active.description}/>
+              <EditInputDialog label="Valor compra" item={active.value_buy}/>
+              <EditInputDialog label="Fornecedor" item={active.provider}/>
+              <EditInputDialog label="Taxa de depreciação" item={active.rate}/>
+              <EditInputDialog label="Localização" item={active.locale}/>
             </div>
 
             <Button

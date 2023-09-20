@@ -68,10 +68,10 @@ export function Invetory() {
               <TableCell className="text-right">{active.locale}</TableCell>
               <TableCell className="text-right">{active.value_buy}</TableCell>
               <TableCell className="flex justify-end gap-3">
-                <EditActive />
+                <EditActive id={active.id}/>
                 <NavLink
                   className="hover:text-green-700 transition ease-in 1s"
-                  to={`/active/${active.id}`}
+                  to={`/actives/${active.id}`}
                 >
                   <Info width={18} />
                 </NavLink>
