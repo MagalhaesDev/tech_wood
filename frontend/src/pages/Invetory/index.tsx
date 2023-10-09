@@ -18,7 +18,7 @@ import { useContext } from "react";
 import { ActivesContext } from "@/contexts/ActivesContext";
 
 export function Invetory() {
-  const { actives } = useContext(ActivesContext);
+  const { actives, filteredActives, searchItem } = useContext(ActivesContext);
 
   return (
     <main className="mt-5 px-[5rem]">
@@ -37,8 +37,8 @@ export function Invetory() {
               <Input
                 className="border-green-800 w-[20rem]"
                 placeholder="Pesquise aqui..."
+                onChange={(e) => searchItem(e.target.value)}
               />
-              <Search className="text-green-800 cursor-pointer hover:text-white transition ease-in 2s" />
             </label>
           </form>
         </div>
@@ -60,25 +60,49 @@ export function Invetory() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {actives.map((active) => (
-            <TableRow id={active.id}>
-              <TableCell className="font-medium">{active.category}</TableCell>
-              <TableCell>{active.date_buy}</TableCell>
-              <TableCell>{active.description}</TableCell>
-              <TableCell className="text-right">{active.locale}</TableCell>
-              <TableCell className="text-right">{active.value_buy}</TableCell>
-              <TableCell className="flex justify-end gap-3">
-                <EditActive id={active.id}/>
-                <NavLink
-                  className="hover:text-green-700 transition ease-in 1s"
-                  to={`/actives/${active.id}`}
-                >
-                  <Info width={18} />
-                </NavLink>
-                <DeleteActive />
-              </TableCell>
-            </TableRow>
-          ))}
+
+          
+          {filteredActives.length === 0 ? (
+                      actives.map((active) => (
+                        <TableRow id={active.id}>
+                          <TableCell className="font-medium">{active.category}</TableCell>
+                          <TableCell>{active.date_buy}</TableCell>
+                          <TableCell>{active.description}</TableCell>
+                          <TableCell className="text-right">{active.locale}</TableCell>
+                          <TableCell className="text-right">{active.value_buy}</TableCell>
+                          <TableCell className="flex justify-end gap-3">
+                            <EditActive id={active.id}/>
+                            <NavLink
+                              className="hover:text-green-700 transition ease-in 1s"
+                              to={`/actives/${active.id}`}
+                            >
+                              <Info width={18} />
+                            </NavLink>
+                            <DeleteActive />
+                          </TableCell>
+                        </TableRow>
+                      ))
+          ) : (
+            filteredActives.map((active) => (
+              <TableRow id={active.id}>
+                <TableCell className="font-medium">{active.category}</TableCell>
+                <TableCell>{active.date_buy}</TableCell>
+                <TableCell>{active.description}</TableCell>
+                <TableCell className="text-right">{active.locale}</TableCell>
+                <TableCell className="text-right">{active.value_buy}</TableCell>
+                <TableCell className="flex justify-end gap-3">
+                  <EditActive id={active.id}/>
+                  <NavLink
+                    className="hover:text-green-700 transition ease-in 1s"
+                    to={`/actives/${active.id}`}
+                  >
+                    <Info width={18} />
+                  </NavLink>
+                  <DeleteActive />
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </main>

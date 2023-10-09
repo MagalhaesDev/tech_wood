@@ -16,7 +16,9 @@ export interface Actives {
 
 interface ActivesContext {
     actives: Actives[],
+    filteredActives: Actives[],
     getUniqueActive: (id?: string) => Actives | undefined;
+    searchItem: (searchQuery: string) => void;
 }
 
 export const ActivesContext = createContext({} as ActivesContext)
@@ -25,10 +27,14 @@ interface ActivesContextProviderProps {
     children: ReactNode
 }
 
+
+
 export function ActivesContextProvider({
     children,
 }: ActivesContextProviderProps) {
     const [actives,setActives] = useState<Actives[]>([]);
+    const [filteredActives, setFilteredActives] = useState<Actives[]>([]);
+
     useEffect(() => {
         api.get("http://localhost:3000/actives").then((response) => setActives(response.data))
     },[]);
@@ -37,8 +43,19 @@ export function ActivesContextProvider({
         return actives.find(active => active.id === id); 
     }
 
+    function searchItem(searchQuery: string) {
+      const filteredActives = actives.filter((active) =>
+        Object.values(active).some((value) =>
+        value.toLowerCase().includes(searchQuery.toLowerCase())
+      ));
+
+
+      setFilteredActives(filteredActives)
+    }
+
+
     return (
-        <ActivesContext.Provider value={{actives, getUniqueActive}}>
+        <ActivesContext.Provider value={{actives, filteredActives, getUniqueActive, searchItem}}>
             {children}
         </ActivesContext.Provider>
     )
