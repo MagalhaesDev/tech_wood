@@ -1,24 +1,39 @@
-import {  LogOut, User2 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { Notification } from "@/pages/Invetory/components/Notification";
+import {
+  Computer,
+  AlignEndHorizontal,
+  Bell,
+  CircleDollarSign,
+  Trophy,
+  Truck,
+} from "lucide-react";
+import imgLogo from "../../assets/logo.svg";
 
 export function Header() {
   return (
-    <>
-      <header className="flex justify-between items-center mx-10 my-3">
-        <h1 className="text-2xl">
-          <strong className="text-[#16a34a]">Wood</strong>Actives
-        </h1>
-        <div className="flex items-center gap-7">
-          <Notification />
-          <div className="flex gap-3">
-            <User2 className="text-[#16a34a]" />
-            <p>Mateus Magalhães</p>
+    <div className="bg-zinc-900 w-min p-3 h-screen flex flex-col justify-between p-4">
+      <img src={imgLogo} width={24} alt="logo" className="cursor-pointer" />
+      <div>
+        <div className="flex flex-col gap-6 items-center justify-center">
+          <div className="cursor-pointer hover:text-green-700 transition ease-in">
+            <Truck size={24} />
           </div>
-          <LogOut className="text-[#16a34a] cursor-pointer hover:text-[#0D5829] ease-linear transition 1s" />
+          <div className="cursor-pointer hover:text-green-700 transition ease-in">
+            <Computer size={24} />
+          </div>
+          <div className="cursor-pointer hover:text-green-700 transition ease-in">
+            <AlignEndHorizontal size={24} />
+          </div>
+          <div className="cursor-pointer hover:text-green-700 transition ease-in">
+            <CircleDollarSign size={24} />
+          </div>
+          <div className="cursor-pointer hover:text-green-700 transition ease-in">
+            <Trophy size={24} />
+          </div>
         </div>
-      </header>
-      <Separator />
-    </>
+      </div>
+      <div className="cursor-pointer hover:text-green-700 transition ease-in">
+        <Bell size={24} />
+      </div>
+    </div>
   );
 }
