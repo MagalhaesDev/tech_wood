@@ -27,6 +27,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@react-spring/web": "^9.7.3",
     "@react-three/drei": "^9.90.0",
     "@react-three/fiber": "^8.15.12",
     "apexcharts": "^3.44.2",

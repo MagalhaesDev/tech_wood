@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactApexChart from "react-apexcharts";
 
 export function GraphicsCalled() {

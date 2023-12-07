@@ -5,7 +5,7 @@ import { SearchInput } from "./components/Search";
 export function Home() {
   return (
     <>
-      <div className="flex items-center justify-between w-[90vw] mt-4">
+      <div className="flex items-center justify-between w-[90vw] my-1">
         <div className="flex justify-center items-center gap-3">
           <div>
             <AvatarDemo />
@@ -20,7 +20,7 @@ export function Home() {
       </div>
 
       <div>
-        <h1 className="text-xl my-2 font-bold">
+        <h1 className="text-md   my-2 font-bold">
           Informações Geral:
         </h1>
       </div>

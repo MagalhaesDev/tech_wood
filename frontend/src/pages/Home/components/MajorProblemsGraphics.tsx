@@ -2,10 +2,10 @@
 
 import ReactApexChart from "react-apexcharts";
 
-export function DonutsSatisfaction() {
+export function MajorProblemsGraphics() {
 
   const state: any = {
-    series: [23,13,3],
+    series: [233,123,43],
     options: {
       chart: {
         type: "donut",
@@ -17,7 +17,7 @@ export function DonutsSatisfaction() {
         show: false
       },
       labels: ['Muito Satisfeito', 'Satisfeito','Totalmente Insatisfeito'],
-      colors: ['#22c55e', '#FFC107', '#FF5722'],
+      colors: ['#f4d410', '#aca2a2', '#g21d2d'],
     },
   };
 
