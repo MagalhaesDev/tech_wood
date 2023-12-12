@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Router";
-import { ActivesContextProvider } from "./contexts/ActivesContext";
+import { TasksContextProvider } from "./contexts/TasksContext";
 
 export function App() {
   return (
     <BrowserRouter>
-      <ActivesContextProvider>
+      <TasksContextProvider>
         <Router />
-      </ActivesContextProvider>
+      </TasksContextProvider>
     </BrowserRouter>
   );
 }

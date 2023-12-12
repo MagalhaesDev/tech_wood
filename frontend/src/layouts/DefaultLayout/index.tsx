@@ -5,7 +5,7 @@ export function DefaultLayout() {
   return (
     <div className="flex ">
       <Header />
-      <div className="mx-10">
+      <div className="mx-10 w-full">
        <Outlet />
       </div>
     </div>

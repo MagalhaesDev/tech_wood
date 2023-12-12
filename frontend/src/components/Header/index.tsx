@@ -7,6 +7,7 @@ import {
   Truck,
 } from "lucide-react";
 import imgLogo from "../../assets/logo.svg";
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   return (
@@ -17,9 +18,12 @@ export function Header() {
           <div className="cursor-pointer hover:text-green-700 transition ease-in">
             <Truck size={24} />
           </div>
-          <div className="cursor-pointer hover:text-green-700 transition ease-in">
-            <Computer size={24} />
-          </div>
+
+          <NavLink to={`/helpdesk`}>
+            <div className="cursor-pointer hover:text-green-700 transition ease-in">
+              <Computer size={24} />
+            </div>
+          </NavLink>
           <div className="cursor-pointer hover:text-green-700 transition ease-in">
             <AlignEndHorizontal size={24} />
           </div>
