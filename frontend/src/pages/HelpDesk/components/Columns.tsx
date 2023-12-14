@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Tasks } from "@/contexts/TasksContext";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, CircleEllipsis } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { ArrowUpDown, Ticket } from "lucide-react";
+
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
+import { AcceptedHelp } from "./AcceptedHelp";
 
 export const columns: ColumnDef<Tasks>[] = [
   {
@@ -30,17 +32,17 @@ export const columns: ColumnDef<Tasks>[] = [
   {
     accessorKey: "id",
     header: () => <div className="text-right "></div>,
-    cell: ({ row }) => {
-      const id: string = row.getValue("id");
-
+    cell: () => {
       return (
         <div className="flex justify-end gap-2 items-center">
-          <NavLink
-            className="hover:text-green-700 transition ease-in 1s"
-            to={`/actives/${id}`}
-          >
-            <CircleEllipsis size={18}/>
-          </NavLink>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">
+                <Ticket size={18} />
+              </Button>
+            </DialogTrigger>
+            <AcceptedHelp />
+          </Dialog>
         </div>
       );
     },
