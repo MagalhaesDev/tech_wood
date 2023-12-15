@@ -13,15 +13,10 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { DialogClose } from "@radix-ui/react-dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@radix-ui/react-select";
+
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DialogClose } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -61,33 +56,46 @@ export function AcceptedHelp() {
             control={form.control}
             name="priority"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
+              <FormItem className="space-y-3">
+                <FormLabel>Prioridade</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="low" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Baixa</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="average" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Media</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="high" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Alta</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="urgent" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Urgente</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
               </FormItem>
             )}
           />
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="secondary"
-                className="bg-red-600 hover:bg-red-800 ease-in transition .2s"
-              >
+              <Button type="button" className="bg-red-500 text-white hover:bg-red-700">
                 Cancelar
               </Button>
             </DialogClose>
