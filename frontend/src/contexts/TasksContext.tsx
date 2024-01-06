@@ -1,11 +1,12 @@
-import { api } from "@/services/api";
 import { ReactNode, createContext, useEffect, useState } from "react";
+import { api } from "../services/api";
 
 export interface Tasks {
-  id: string;
-  name: string;
-  description: string;
-  priority: string;
+  id: string; 
+  name: string; 
+  ticket: string;     
+  description: string;  
+  priority: string;  
   department: string;
   problem: string;
 }

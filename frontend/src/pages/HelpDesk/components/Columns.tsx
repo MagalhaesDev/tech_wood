@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Tasks } from "@/contexts/TasksContext";
-import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, Ticket } from "lucide-react";
 
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog";
 import { AcceptedHelp } from "./AcceptedHelp";
+import { Button } from "../../../components/ui/button";
+import { Tasks } from "../../../contexts/TasksContext";
+import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<Tasks>[] = [
   {

@@ -1,24 +1,13 @@
-import { Button } from "@/components/ui/button";
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DialogClose } from "@radix-ui/react-dialog";
+import { DialogClose, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { DialogHeader } from "../../../components/ui/dialog";
+import { Form } from "react-router-dom";
+import { FormControl, FormField, FormItem, FormLabel } from "../../../components/ui/form";
+import { RadioGroup } from "@radix-ui/react-context-menu";
+import { RadioGroupItem } from "@radix-ui/react-radio-group";
+import { Button } from "../../../components/ui/button";
 
 const FormSchema = z.object({
   priority: z.string(),
@@ -103,8 +92,6 @@ export function AcceptedHelp() {
           </div>
         </form>
       </Form>
-
-      <DialogFooter></DialogFooter>
     </DialogContent>
   );
 }
