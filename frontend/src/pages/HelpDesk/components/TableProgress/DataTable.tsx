@@ -11,29 +11,28 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 
-import { ClipboardEdit, Table } from "lucide-react";
 import React from "react";
-import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
+import { ClipboardEdit } from "lucide-react";
+import { Input } from "../../../../components/ui/input";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../../../../components/ui/dropdown-menu";
+import { Button } from "../../../../components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../components/ui/table";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  type: string
 }
 
-export function DataTable<TData, TValue>({
+export function DataTableProgress<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData , TValue>) {
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-
 
   const table = useReactTable({
     data,
@@ -54,7 +53,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex w-full py-4 gap-4">
+      <div className="flex items-center py-4 gap-4">
         <Input
           placeholder="Filtrar ticket..."
           value={
@@ -64,7 +63,33 @@ export function DataTable<TData, TValue>({
             table.getColumn("ticket")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />  
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Colunas
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>   
       </div>
 
       <div>
@@ -113,10 +138,7 @@ export function DataTable<TData, TValue>({
                   >
                     <div className="text-zinc-500 flex flex-col items-center my-5 gap-3 ">
                       <ClipboardEdit size={48} />
-                      <h3>Não há nenhum ativo registrado</h3>
-                      <span className="text-sm">
-                        ( para registrar um ativo clique em novo ativo )
-                      </span>
+                      <h3>Não há nenhuma tarefa em andamento</h3>
                     </div>
                   </TableCell>
                 </TableRow>

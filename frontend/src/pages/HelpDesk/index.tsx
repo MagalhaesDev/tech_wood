@@ -1,30 +1,25 @@
-
-import { TasksContext } from "../../contexts/TasksContext";
-import { columns } from "./components/Columns";
-import { DataTable } from "./components/DataTable";
-import { useContext } from "react";
-
+import { TablePendent } from "./components/TablePendent";
+import { TableProgress } from "./components/TableProgress";
+import { TableFinished } from "./components/TableFinished";
+import { Separator } from "../../components/ui/separator";
 
 export function HelpDesk() {
-  const { tasks } = useContext(TasksContext);
-
-  console.log(tasks)
-
   return (
     <div>
-      <h2 className="text-center mt-3 text-2xl text-green-700 font-bold">Tasks</h2>
-      <div className="flex w-full gap-2 mt-3 justify-around">
-        <div className="flex flex-col items-center">
-          <h2>Pendente</h2>
-          <DataTable columns={columns} data={tasks} type={"pendent"}/>
+      <div className="flex flex-col w-full mt-6 gap-5">
+        <div className="flex flex-col">
+          <h2 className="text-center text-2xl text-red-700 font-bold">Pendente</h2>
+          <TablePendent />
         </div>
-        <div className="flex flex-col items-center" >
-          <h2>Andamento</h2>
-          <DataTable columns={columns} data={tasks} type={"progress"}/>
+        <Separator />
+        <div className="flex flex-col">
+          <h2 className="text-center text-xl text-yellow-700 font-bold">Andamento</h2>
+          <TableProgress />
         </div>
-        <div className="flex flex-col items-center">
-          <h2>Finalizado</h2>
-          <DataTable columns={columns} data={tasks} type={"finished"}/>
+        <Separator />
+        <div className="flex flex-col">
+          <h2 className="text-center text-xl text-green-700  font-bold">Finalizado</h2>
+          <TableFinished />
         </div>
       </div>
     </div>

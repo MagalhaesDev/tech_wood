@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 export function Header() {
   return (
-    <div className="bg-zinc-900 w-min p-3 h-screen flex flex-col justify-between p-4">
+    <div className="bg-zinc-900  p-3 h-screen fixed flex flex-col justify-between p-4">
       <img src={imgLogo} width={24} alt="logo" className="cursor-pointer" />
       <div>
         <div className="flex flex-col gap-6 items-center justify-center">

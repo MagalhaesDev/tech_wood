@@ -9,11 +9,16 @@ export interface Tasks {
   priority: string;  
   department: string;
   problem: string;
+  createDate:   Date;
+  acceptedDate: Date;
+  finishedDate: Date;
 }
 
 
 interface TasksContext {
-  tasks: Tasks[];
+  tasksPendent: Tasks[],
+  tasksProgress: Tasks[],
+  tasksConcluded: Tasks[],
 }
 
 export const TasksContext = createContext({} as TasksContext);
@@ -31,8 +36,19 @@ export function TasksContextProvider({ children }: TasksContextProviderProps) {
       .then((response) => setTasks(response.data));
   }, []);
 
+  const tasksPendent = tasks.filter(task => !task.priority || task.priority === "");
+  const tasksProgress = tasks.filter(task => ["BAIXA", "MEDIA", "ALTA", "URGENTE"].includes(task.priority));
+  const tasksConcluded = tasks.filter(task => task.priority === "CONCLUIDO");
+
+  console.log(tasksPendent)
+  console.log("---------------")
+  console.log(tasksProgress)
+  console.log("---------------")
+  console.log(tasksConcluded)
+  console.log("---------------")
+
 
   return (
-    <TasksContext.Provider value={{ tasks }}>{children}</TasksContext.Provider>
+    <TasksContext.Provider value={{ tasksPendent, tasksProgress ,tasksConcluded }}>{children}</TasksContext.Provider>
   );
 }
