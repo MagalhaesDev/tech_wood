@@ -65,7 +65,7 @@ export function AcceptedHelp({ columnId }: AcceptedHelpProps) {
       priority: data.priority,
     };
 
-    api.put("http://localhost:3000/tasks/priority", updatePriority);
+    api.put("http://192.168.15.181:3000/tasks/priority", updatePriority);
 
     window.location.reload();
   }

@@ -32,20 +32,13 @@ export function TasksContextProvider({ children }: TasksContextProviderProps) {
 
   useEffect(() => {
     api
-      .get("http://localhost:3000/tasks")
+      .get("http://192.168.15.181:3000/tasks")
       .then((response) => setTasks(response.data));
   }, []);
 
   const tasksPendent = tasks.filter(task => !task.priority || task.priority === "");
   const tasksProgress = tasks.filter(task => ["BAIXA", "MEDIA", "ALTA", "URGENTE"].includes(task.priority));
   const tasksConcluded = tasks.filter(task => task.priority === "CONCLUIDO");
-
-  console.log(tasksPendent)
-  console.log("---------------")
-  console.log(tasksProgress)
-  console.log("---------------")
-  console.log(tasksConcluded)
-  console.log("---------------")
 
 
   return (
