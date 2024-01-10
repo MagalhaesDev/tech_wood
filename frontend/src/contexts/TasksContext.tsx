@@ -32,7 +32,7 @@ export function TasksContextProvider({ children }: TasksContextProviderProps) {
 
   useEffect(() => {
     api
-      .get("http://192.168.15.181:3000/tasks")
+      .get("http://192.168.15.141:3000/tasks")
       .then((response) => setTasks(response.data));
   }, []);
 

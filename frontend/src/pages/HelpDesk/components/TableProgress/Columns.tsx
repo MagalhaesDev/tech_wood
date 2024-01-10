@@ -5,8 +5,6 @@ import { Tasks } from "../../../../contexts/TasksContext";
 import { Dialog, DialogTrigger } from "../../../../components/ui/dialog";
 import { ConcludeTask } from "./components/ConcludeTask";
 
-
-
 export const columns: ColumnDef<Tasks>[] = [
   {
     accessorKey: "ticket",
@@ -36,23 +34,34 @@ export const columns: ColumnDef<Tasks>[] = [
   },
   {
     accessorKey: "description",
-    header: "Descrição",
+    header: () => <div>Descrição</div>,
+    cell: ({ row }) => {
+      const formatted = String(row.getValue("description"));
+
+      return (
+        <div>
+          {formatted.length > 60 ? `${formatted.slice(0, 60)} ...` : formatted}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "acceptedDate",
     header: () => <div>Data</div>,
     cell: ({ row }) => {
       const dateFormatted = new Date(row.getValue("acceptedDate"));
-      const options: Intl.DateTimeFormatOptions = { 
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit', 
-        hour: '2-digit', 
-        minute: '2-digit', 
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
         hour12: false,
-        timeZone: 'America/Sao_Paulo'
+        timeZone: "America/Sao_Paulo",
       };
-      const formatted = new Intl.DateTimeFormat("pt-BR", options).format(dateFormatted);
+      const formatted = new Intl.DateTimeFormat("pt-BR", options).format(
+        dateFormatted
+      );
 
       return <div>{formatted}</div>;
     },
@@ -60,16 +69,16 @@ export const columns: ColumnDef<Tasks>[] = [
   {
     accessorKey: "id",
     header: () => <div className="text-right "></div>,
-    cell: ({cell}) => {
+    cell: ({ cell }) => {
       return (
         <div className="flex justify-end gap-2 items-center">
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="outline">
-                <CheckCircle2  size={18} />
+                <CheckCircle2 size={18} />
               </Button>
             </DialogTrigger>
-            <ConcludeTask columnId={cell.row.original.id}/>
+            <ConcludeTask columnId={cell.row.original.id} />
           </Dialog>
         </div>
       );

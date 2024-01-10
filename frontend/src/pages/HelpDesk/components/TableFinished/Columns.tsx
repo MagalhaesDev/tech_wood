@@ -30,7 +30,12 @@ export const columns: ColumnDef<Tasks>[] = [
   },
   {
     accessorKey: "description",
-    header: "Descrição",
+    header: () => <div >Descrição</div>,
+    cell: ({ row }) => {
+      const formatted = String(row.getValue("description"))
+
+      return <div>{formatted.length > 60 ? `${formatted.slice(0,60)} ...` : formatted}</div>;
+    },
   },
   {
     accessorKey: "finishedDate",

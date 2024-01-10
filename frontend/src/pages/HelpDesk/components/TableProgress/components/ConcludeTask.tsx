@@ -45,7 +45,7 @@ export function ConcludeTask({ columnId }: AcceptedHelpProps) {
       priority: "CONCLUIDO",
     };
 
-    api.put("http://192.168.15.181:3000/tasks/concluded", updatePriority);
+    api.put("http://192.168.15.141:3000/tasks/concluded", updatePriority);
 
     window.location.reload();
   }

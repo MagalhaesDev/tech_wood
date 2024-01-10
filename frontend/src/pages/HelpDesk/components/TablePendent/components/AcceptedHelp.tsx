@@ -23,9 +23,11 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { api } from "../../../../../services/api";
 import { useContext } from "react";
 import { TasksContext } from "../../../../../contexts/TasksContext";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../components/ui/select";
 
 const FormSchema = z.object({
   priority: z.string(),
+  problem: z.string()
 });
 
 interface AcceptedHelpProps {
@@ -63,9 +65,10 @@ export function AcceptedHelp({ columnId }: AcceptedHelpProps) {
     const updatePriority = {
       id: columnId,
       priority: data.priority,
+      problem: data.problem
     };
 
-    api.put("http://192.168.15.181:3000/tasks/priority", updatePriority);
+    api.put("http://192.168.15.141:3000/tasks/priority", updatePriority);
 
     window.location.reload();
   }
@@ -74,13 +77,10 @@ export function AcceptedHelp({ columnId }: AcceptedHelpProps) {
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
         <DialogTitle>
-          <div className="flex items-center gap-8">
-            <h1 className="text-2xl text-green-600">{taskActually?.problem}</h1>
+          <div className="flex items-center gap-8 ">
+            <h1 className="text-xl text-green-600">{taskActually?.name}</h1>
             <p className="text-sm text-zinc-400">{formattedDate}</p>
           </div>
-          <h2 className="py-2 text-sm">
-            {taskActually?.name} <span>- {taskActually?.department}</span>
-          </h2>
         </DialogTitle>
         <DialogDescription>
           {taskActually?.description}
@@ -129,6 +129,34 @@ export function AcceptedHelp({ columnId }: AcceptedHelpProps) {
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="problem"
+            render={({ field }) => (
+              <FormItem className="w-full ">
+                <FormLabel className="flex items-end gap-1">
+                  <span>Problema</span>
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione o problema..." />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="WINDOWS">Windows</SelectItem>
+                    <SelectItem value="SISTEMA">Sistema ERP</SelectItem>
+                    <SelectItem value="PROGRAMAS">Programas</SelectItem>
+                    <SelectItem value="HARDWARE">Hardware</SelectItem>
+                    <SelectItem value="OUTROS">Outros</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
