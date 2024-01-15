@@ -1,7 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Info } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { Tasks } from "../../../../contexts/TasksContext";
+import { Dialog, DialogTrigger } from "../../../../components/ui/dialog";
+import { InfoTask } from "./components/InfoTask";
 
 
 
@@ -54,6 +56,24 @@ export const columns: ColumnDef<Tasks>[] = [
       const formatted = new Intl.DateTimeFormat("pt-BR", options).format(dateFormatted);
 
       return <div>{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "id",
+    header: () => <div className="text-right "></div>,
+    cell: ({cell}) => {
+      return (
+        <div className="flex justify-end gap-2 items-center">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">
+                <Info size={18} />
+              </Button>
+            </DialogTrigger>
+            <InfoTask columnId={cell.row.original.id}/>
+          </Dialog>
+        </div>
+      );
     },
   },
 ];

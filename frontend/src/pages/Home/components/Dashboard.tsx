@@ -1,21 +1,27 @@
+import { useContext } from "react";
 import { GraphicsCalled } from "./GraphicsCalled";
 import { GraphicsSatisfaction } from "./GraphicsSatisfaction";
 import { MajorProblemsGraphics } from "./MajorProblemsGraphics";
+import { TasksContext } from "../../../contexts/TasksContext";
 
 export function Dashboard() {
+  const { tasksConcluded, tasksPendent, tasksProgress } = useContext(TasksContext);
+
+  const totalTask = tasksConcluded.length + tasksPendent.length + tasksProgress.length
+
   return (
     <div className=" grid grid-cols-4 gap-3 ">
       <div className="bg-zinc-900 rounded-md p-3 flex flex-col items-center gap-3">
         <h2 className="text-zinc-300 font-bold text-md">Chamados total:</h2>
         <div className="text-center text-[3rem] font-bold text-green-500 ">
-          130
+          {totalTask}
         </div>
       </div>
       <div className="bg-zinc-900 rounded-md  p-3 flex flex-col items-center gap-3">
         <h2 className="text-zinc-300 font-bold text-lg">
           Chamados em andamento:
         </h2>
-        <div className="text-center text-[3rem] font-bold text-red-500">10</div>
+        <div className="text-center text-[3rem] font-bold text-red-500">{tasksProgress.length}</div>
       </div>
       <div className="bg-zinc-900 rounded-md  p-3 flex flex-col items-center gap-3">
         <h2 className="text-zinc-300 font-bold text-lg">Total Despesas:</h2>
