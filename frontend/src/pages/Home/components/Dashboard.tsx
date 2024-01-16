@@ -7,7 +7,9 @@ import { TasksContext } from "../../../contexts/TasksContext";
 export function Dashboard() {
   const { tasksConcluded, tasksPendent, tasksProgress } = useContext(TasksContext);
 
-  const totalTask = tasksConcluded.length + tasksPendent.length + tasksProgress.length
+  const totalTask = tasksConcluded.length + tasksPendent.length + tasksProgress.length;
+
+  const tasksToDay = tasksConcluded.filter((task) => new Date(task.finishedDate).getDay() === new Date().getDay())
 
   return (
     <div className=" grid grid-cols-4 gap-3 ">
@@ -24,23 +26,20 @@ export function Dashboard() {
         <div className="text-center text-[3rem] font-bold text-red-500">{tasksProgress.length}</div>
       </div>
       <div className="bg-zinc-900 rounded-md  p-3 flex flex-col items-center gap-3">
-        <h2 className="text-zinc-300 font-bold text-lg">Total Despesas:</h2>
+        <h2 className="text-zinc-300 font-bold text-lg">Chamados do dia:</h2>
         <div className="text-center text-[3rem] font-bold text-green-500">
-          $ 10 mil
+          {tasksToDay.length}
         </div>
       </div>
       <div className="bg-zinc-900 row-span-2 rounded-md flex flex-col items-center justify-center gap-3">
         <div className="flex flex-col items-center gap-2">
-          <h2 className="font-bold text-xl">Total de ativos</h2>
-          <div className="text-green-500 text-[2rem] font-bold">97</div>
+          <h2 className="font-bold text-xl">Horas totais:</h2>
+          <div className="text-green-500 text-[2rem] font-bold">
+          </div>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <h2 className="font-bold text-xl">Total de descarte</h2>
+          <h2 className="font-bold text-xl">Horas acumulada dia:</h2>
           <div className="text-red-500 text-[2rem] font-bold">27</div>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <h2 className="font-bold text-xl">Total de manutenção</h2>
-          <div className="text-red-500 text-[2rem] font-bold">37</div>
         </div>
       </div>
       <div className="bg-zinc-900 col-start-1 col-end-4 rounded-md">
