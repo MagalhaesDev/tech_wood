@@ -15,10 +15,11 @@ export function Header() {
       <img src={imgLogo} width={24} alt="logo" className="cursor-pointer" />
       <div>
         <div className="flex flex-col gap-6 items-center justify-center">
-          <div className="cursor-pointer hover:text-green-700 transition ease-in">
-            <Truck size={24} />
-          </div>
-
+          <NavLink to={`/inventory`}>
+            <div className="cursor-pointer hover:text-green-700 transition ease-in">
+              <Truck size={24} />
+            </div>
+          </NavLink>
           <NavLink to={`/helpdesk`}>
             <div className="cursor-pointer hover:text-green-700 transition ease-in">
               <Computer size={24} />
