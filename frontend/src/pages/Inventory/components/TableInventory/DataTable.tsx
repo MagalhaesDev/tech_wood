@@ -14,9 +14,9 @@ import {
   import React from "react";
   import { ClipboardEdit } from "lucide-react";
   import { Input } from "../../../../components/ui/input";
-  import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "../../../../components/ui/dropdown-menu";
   import { Button } from "../../../../components/ui/button";
   import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../components/ui/table";
+import { NewItem } from "../NewItem";
   
   interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -64,9 +64,7 @@ import {
             }
             className="max-w-sm"
           />
-          <button>
-            Cadastrar
-          </button>
+          <NewItem />
         </div>
   
         <div>
