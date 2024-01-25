@@ -8,9 +8,16 @@ import {
 } from "../../../../../components/ui/form";
 import { Input } from "../../../../../components/ui/input";
 import { Button } from "../../../../../components/ui/button";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "../../../../../components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../../../components/ui/select";
 
 const formSchema = z.object({
   grup: z.string().min(2, {
@@ -27,11 +34,17 @@ const formSchema = z.object({
   model: z.string(),
   department: z.string(),
   unit: z.string(),
-  date_buy: z.string(),
-  date_end: z.string(),
-});
+  date_buy: z.coerce
+      .date()
+      .max(new Date(), { message: "Data superior a data atual" }),
+  date_end: z.date(),
+}).refine((fields) => fields.date_end > fields.date_end, {
+  path: ["date_end"],
+  message: "Data menor que a data de compra",
+})
 
 export function NewItemForm() {
+  const { register } = useFormContext()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,13 +68,35 @@ export function NewItemForm() {
             <div className="flex flex-col gap-2 ">
               <FormField
                 control={form.control}
-                name="grup"
+                name="department"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Grupo:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+                    <FormLabel>
+                      <span>Grupo</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione o grupo" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Administrativo">
+                          Administrativo
+                        </SelectItem>
+                        <SelectItem value="Orcamento">Orçamento</SelectItem>
+                        <SelectItem value="Dep Tecnico">Dep Tecnico</SelectItem>
+                        <SelectItem value="Qualidade">Qualidade</SelectItem>
+                        <SelectItem value="Producao">Produção</SelectItem>
+                        <SelectItem value="Recebimento">Recebimento</SelectItem>
+                        <SelectItem value="Financeiro">Financeiro</SelectItem>
+                        <SelectItem value="Expedicao">Expedição</SelectItem>
+                        <SelectItem value="rh">R.H</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
@@ -112,7 +147,7 @@ export function NewItemForm() {
                   <FormItem>
                     <FormLabel>Quantidade:</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="number" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -122,11 +157,27 @@ export function NewItemForm() {
                 control={form.control}
                 name="state"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Estado:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+                  <FormItem className="w-full">
+                    <FormLabel>
+                      <span>Estado</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione o estado" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Administrativo">Pessimo</SelectItem>
+                        <SelectItem value="Orcamento">Ruim</SelectItem>
+                        <SelectItem value="Dep Tecnico">Bom</SelectItem>
+                        <SelectItem value="Dep Tecnico">Muito Bom</SelectItem>
+                        <SelectItem value="Dep Tecnico">Excelente</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
@@ -140,7 +191,7 @@ export function NewItemForm() {
                   <FormItem>
                     <FormLabel>Valor un:</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="number" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -152,7 +203,7 @@ export function NewItemForm() {
                   <FormItem>
                     <FormLabel>Valor total:</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="number" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -164,11 +215,33 @@ export function NewItemForm() {
                 control={form.control}
                 name="department"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Departamento:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+                  <FormItem className="w-full">
+                    <FormLabel>
+                      <span>Grupo</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione o departamento" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Administrativo">
+                          Administrativo
+                        </SelectItem>
+                        <SelectItem value="Orcamento">Orçamento</SelectItem>
+                        <SelectItem value="Dep Tecnico">Dep Tecnico</SelectItem>
+                        <SelectItem value="Qualidade">Qualidade</SelectItem>
+                        <SelectItem value="Producao">Produção</SelectItem>
+                        <SelectItem value="Recebimento">Recebimento</SelectItem>
+                        <SelectItem value="Financeiro">Financeiro</SelectItem>
+                        <SelectItem value="Expedicao">Expedição</SelectItem>
+                        <SelectItem value="rh">R.H</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
@@ -176,11 +249,25 @@ export function NewItemForm() {
                 control={form.control}
                 name="unit"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Unidade:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+                  <FormItem className="w-full">
+                    <FormLabel>
+                      <span>Grupo</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione o grupo" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Administrativo">Woodpel</SelectItem>
+                        <SelectItem value="Orcamento">Life</SelectItem>
+                        <SelectItem value="Dep Tecnico">Woodflex</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />
@@ -191,10 +278,10 @@ export function NewItemForm() {
                 control={form.control}
                 name="date_buy"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel>Data compra:</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="date" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -203,10 +290,10 @@ export function NewItemForm() {
                 control={form.control}
                 name="date_end"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel>Data saida:</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="date" />
                     </FormControl>
                   </FormItem>
                 )}
