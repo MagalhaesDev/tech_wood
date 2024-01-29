@@ -10,15 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Actives {
+model Inventorys {
     id String @id @default(uuid())
-    category String
-    locale String
-    date_buy String
-    value_buy String
-    nf Decimal
-    rate Decimal
+    department String
     description String
-    provider String
-    life_util String
+    grup String
+    marca String
+    model Decimal
+    quantity Decimal
+    state String
+    unit String
+    value_un String
+    date_buy DateTime?
+    date_end DateTime?
 }

@@ -1,29 +1,42 @@
 import { FastifyInstance } from "fastify";
-import { z } from 'zod';
 import { prisma } from "../lib/prisma";
+import { z } from "zod";
 
-export async function activesRoutes(app: FastifyInstance) {
+export async function inventoryRoutes(app: FastifyInstance) {
+  app.get("/inventorys", async () => {
+    const inventorys = await prisma.inventorys.findMany();
 
-app.get('/actives',async () => {
-  const products = await prisma.actives.findMany();
+    return inventorys;
+  });
 
-  return products;
-})
+  app.post("/inventorys", async (request, response) => {
+    const paramsBody = z.object({
+      grup: z.string(),
+      description: z.string(),
+      value_un: z.string(),
+      value_total: z.string(),
+      state: z.string(),
+      marca: z.string(),
+      model: z.string(),
+      department: z.string(),
+      quantity: z.string(),
+      unit: z.string(),
+      date_buy: z.coerce.date(),
+      date_end: z.coerce.date(),
+    });
 
-app.get('/actives/:id',async (request) => {
-  const paramsSchema = z.object( {
-    id: z.string().uuid(),
-  })
+    const item = paramsBody.parse(request.body);
 
-  const { id } = paramsSchema.parse(request.params)
+    try {
+      await prisma.inventorys.create({
+        data: {
+          ...item,
+        },
+      });
 
-  const product = await prisma.actives.findUniqueOrThrow({
-    where: {
-      id,
+      return response.status(200);
+    } catch (err) {
+      return response.status(500);
     }
-  })
-
-  return product;
-})
-
+  });
 }

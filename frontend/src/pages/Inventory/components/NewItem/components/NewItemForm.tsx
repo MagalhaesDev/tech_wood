@@ -6,9 +6,8 @@ import {
   FormItem,
   FormLabel,
 } from "../../../../../components/ui/form";
-import { Input } from "../../../../../components/ui/input";
 import { Button } from "../../../../../components/ui/button";
-import { useForm, useFormContext } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "../../../../../components/ui/textarea";
 import {
@@ -18,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../../../components/ui/select";
+import { InputDialog } from "./InputDialog";
 
 const formSchema = z.object({
   grup: z.string().min(2, {
@@ -26,41 +26,38 @@ const formSchema = z.object({
   description: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-  quantity: z.number(),
   value_un: z.string(),
   value_total: z.string(),
   state: z.string(),
   marca: z.string(),
   model: z.string(),
   department: z.string(),
+  quantity: z.string(),
   unit: z.string(),
   date_buy: z.coerce
-      .date()
-      .max(new Date(), { message: "Data superior a data atual" }),
-  date_end: z.date(),
-}).refine((fields) => fields.date_end > fields.date_end, {
+    .date()
+    .max(new Date(), { message: "Data superior a data atual" }),
+  date_end: z.coerce.date(),
+}).refine((fields) => fields.date_end > fields.date_buy, {
   path: ["date_end"],
   message: "Data menor que a data de compra",
 })
 
+export type formSchemaType = typeof formSchema;
+
 export function NewItemForm() {
-  const { register } = useFormContext()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      grup: "",
-      description: "",
-    },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function handleSubmitForm(values: z.infer<typeof formSchema>) {
+    console.log(values)
   }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(handleSubmitForm)}
         className="space-y-8 flex flex-col items-center "
       >
         <div className="flex gap-4 w-full">
@@ -68,7 +65,7 @@ export function NewItemForm() {
             <div className="flex flex-col gap-2 ">
               <FormField
                 control={form.control}
-                name="department"
+                name="grup"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -84,73 +81,47 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Administrativo">
-                          Administrativo
-                        </SelectItem>
-                        <SelectItem value="Orcamento">Orçamento</SelectItem>
-                        <SelectItem value="Dep Tecnico">Dep Tecnico</SelectItem>
-                        <SelectItem value="Qualidade">Qualidade</SelectItem>
-                        <SelectItem value="Producao">Produção</SelectItem>
-                        <SelectItem value="Recebimento">Recebimento</SelectItem>
-                        <SelectItem value="Financeiro">Financeiro</SelectItem>
-                        <SelectItem value="Expedicao">Expedição</SelectItem>
-                        <SelectItem value="rh">R.H</SelectItem>
+                        <SelectItem value="impressora">Impressora</SelectItem>
+                        <SelectItem value="periferico">Periferico</SelectItem>
+                        <SelectItem value="monitor">Monitor</SelectItem>
+                        <SelectItem value="memoria ram">Memoria Ram</SelectItem>
+                        <SelectItem value="processador">Processador</SelectItem>
+                        <SelectItem value="ssd/hdd">SSD/HDD</SelectItem>
+                        <SelectItem value="outros">Outros</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="marca"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Marca:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
+
+              <InputDialog
+                nameInput="marca"
+                label="Marca"
+                controlInput={form.control}
+                type="text"
               />
-              <FormField
-                control={form.control}
-                name="model"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Modelo:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="model"
+                label="Modelo"
+                controlInput={form.control}
+                type="text"
               />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Descrição:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
+
+              <InputDialog
+                nameInput="description"
+                label="Descrição"
+                controlInput={form.control}
+                type="text"
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
-              <FormField
-                control={form.control}
-                name="quantity"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Quantidade:</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="number" />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="quantity"
+                label="Quantidade"
+                controlInput={form.control}
+                type="number"
               />
 
               <FormField
@@ -171,11 +142,11 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Administrativo">Pessimo</SelectItem>
-                        <SelectItem value="Orcamento">Ruim</SelectItem>
-                        <SelectItem value="Dep Tecnico">Bom</SelectItem>
-                        <SelectItem value="Dep Tecnico">Muito Bom</SelectItem>
-                        <SelectItem value="Dep Tecnico">Excelente</SelectItem>
+                        <SelectItem value="terrible">Pessimo</SelectItem>
+                        <SelectItem value="bad">Ruim</SelectItem>
+                        <SelectItem value="good">Bom</SelectItem>
+                        <SelectItem value="very_good">Muito Bom</SelectItem>
+                        <SelectItem value="great">Excelente</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -184,29 +155,17 @@ export function NewItemForm() {
             </div>
 
             <div className="flex gap-2">
-              <FormField
-                control={form.control}
-                name="value_un"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Valor un:</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="number" />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="value_un"
+                label="Valor unitario"
+                controlInput={form.control}
+                type="number"
               />
-              <FormField
-                control={form.control}
-                name="value_total"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Valor total:</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="number" />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="value_total"
+                label="Valor total"
+                controlInput={form.control}
+                type="number"
               />
             </div>
 
@@ -217,7 +176,7 @@ export function NewItemForm() {
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormLabel>
-                      <span>Grupo</span>
+                      <span>Departamento</span>
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -232,13 +191,13 @@ export function NewItemForm() {
                         <SelectItem value="Administrativo">
                           Administrativo
                         </SelectItem>
-                        <SelectItem value="Orcamento">Orçamento</SelectItem>
-                        <SelectItem value="Dep Tecnico">Dep Tecnico</SelectItem>
-                        <SelectItem value="Qualidade">Qualidade</SelectItem>
-                        <SelectItem value="Producao">Produção</SelectItem>
-                        <SelectItem value="Recebimento">Recebimento</SelectItem>
-                        <SelectItem value="Financeiro">Financeiro</SelectItem>
-                        <SelectItem value="Expedicao">Expedição</SelectItem>
+                        <SelectItem value="budget">Orçamento</SelectItem>
+                        <SelectItem value="technician">Dep Tecnico</SelectItem>
+                        <SelectItem value="quality">Qualidade</SelectItem>
+                        <SelectItem value="production">Produção</SelectItem>
+                        <SelectItem value="receipt">Recebimento</SelectItem>
+                        <SelectItem value="financial">Financeiro</SelectItem>
+                        <SelectItem value="expedition">Expedição</SelectItem>
                         <SelectItem value="rh">R.H</SelectItem>
                       </SelectContent>
                     </Select>
@@ -263,9 +222,9 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Administrativo">Woodpel</SelectItem>
-                        <SelectItem value="Orcamento">Life</SelectItem>
-                        <SelectItem value="Dep Tecnico">Woodflex</SelectItem>
+                        <SelectItem value="woodpel">Woodpel</SelectItem>
+                        <SelectItem value="life">Life</SelectItem>
+                        <SelectItem value="woodflex">Woodflex</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -274,29 +233,17 @@ export function NewItemForm() {
             </div>
 
             <div className="flex gap-2">
-              <FormField
-                control={form.control}
-                name="date_buy"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Data compra:</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="date" />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="date_buy"
+                label="Data compra"
+                controlInput={form.control}
+                type="date"
               />
-              <FormField
-                control={form.control}
-                name="date_end"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Data saida:</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="date" />
-                    </FormControl>
-                  </FormItem>
-                )}
+              <InputDialog
+                nameInput="date_end"
+                label="Data final"
+                controlInput={form.control}
+                type="date"
               />
             </div>
           </div>
