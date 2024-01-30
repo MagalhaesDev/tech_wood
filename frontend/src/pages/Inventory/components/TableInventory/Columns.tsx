@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, CheckCircle2 } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
-import { Tasks } from "../../../../contexts/TasksContext";
 import { Dialog, DialogTrigger } from "../../../../components/ui/dialog";
+import { Items } from "../../../../contexts/InventoryContenxt";
 
-export const columns: ColumnDef<Tasks>[] = [
+export const columns: ColumnDef<Items>[] = [
   {
     accessorKey: "ticket",
     header: ({ column }) => {
@@ -20,24 +20,24 @@ export const columns: ColumnDef<Tasks>[] = [
     },
   },
   {
-    accessorKey: "priority",
+    accessorKey: "grup",
     header: "Grupo",
   },
   {
-    accessorKey: "name",
-    header: "Descrição",
+    accessorKey: "department",
+    header: "Departamento",
   },
   {
-    accessorKey: "problem",
+    accessorKey: "quantity",
     header: "Quantidade",
   },
   {
-    accessorKey: "problem",
+    accessorKey: "unit",
     header: "Unidade",
   },
   {
     accessorKey: "description",
-    header: () => <div>Departamento</div>,
+    header: () => <div>Descricao</div>,
     cell: ({ row }) => {
       const formatted = String(row.getValue("description"));
 
@@ -49,10 +49,10 @@ export const columns: ColumnDef<Tasks>[] = [
     },
   },
   {
-    accessorKey: "acceptedDate",
-    header: () => <div>Data compra</div>,
+    accessorKey: "date_buy",
+    header: () => <div>Data de compra</div>,
     cell: ({ row }) => {
-      const dateFormatted = new Date(row.getValue("acceptedDate"));
+      const dateFormatted = new Date(row.getValue("date_buy"));
       const options: Intl.DateTimeFormatOptions = {
         year: "numeric",
         month: "2-digit",

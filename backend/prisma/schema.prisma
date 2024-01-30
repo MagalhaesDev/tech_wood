@@ -12,12 +12,13 @@ datasource db {
 
 model Inventorys {
     id String @id @default(uuid())
+    ticket Int
     department String
     description String
     grup String
     marca String
-    model Decimal
-    quantity Decimal
+    model String
+    quantity String
     state String
     unit String
     value_un String

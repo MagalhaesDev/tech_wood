@@ -1,6 +1,6 @@
 import cors from '@fastify/cors';
 import fastify from 'fastify';
-import { inventoryRoutes } from './routes/active';
+import { inventoryRoutes } from './routes/inventory';
 
 const app = fastify()
 

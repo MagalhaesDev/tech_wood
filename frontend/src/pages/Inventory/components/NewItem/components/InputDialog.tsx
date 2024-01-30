@@ -5,7 +5,7 @@ import { formSchemaType } from "./NewItemForm";
 import { FormControl, FormField, FormItem } from "../../../../../components/ui/form";
 import { Input } from "../../../../../components/ui/input";
 
-type ControlInputTypes = "grup" | "description" | "quantity" | "value_un" | "value_total" | "state" | "marca" | "model" | "department" | "unit" | "date_buy" | "date_end"
+type ControlInputTypes = "grup" | "description" | "quantity" | "value_un" | "state" | "marca" | "model" | "department" | "unit" | "date_buy" | "date_end"
 
 interface InputDialog {
     nameInput: ControlInputTypes,

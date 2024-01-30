@@ -18,40 +18,44 @@ import {
   SelectValue,
 } from "../../../../../components/ui/select";
 import { InputDialog } from "./InputDialog";
+import { useContext } from "react";
+import { InventoryContext } from "../../../../../contexts/InventoryContenxt";
 
-const formSchema = z.object({
-  grup: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  description: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  value_un: z.string(),
-  value_total: z.string(),
-  state: z.string(),
-  marca: z.string(),
-  model: z.string(),
-  department: z.string(),
-  quantity: z.string(),
-  unit: z.string(),
-  date_buy: z.coerce
-    .date()
-    .max(new Date(), { message: "Data superior a data atual" }),
-  date_end: z.coerce.date(),
-}).refine((fields) => fields.date_end > fields.date_buy, {
-  path: ["date_end"],
-  message: "Data menor que a data de compra",
-})
+const formSchema = z
+  .object({
+    grup: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+    description: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+    value_un: z.string(),
+    state: z.string(),
+    marca: z.string(),
+    model: z.string(),
+    department: z.string(),
+    quantity: z.string(),
+    unit: z.string(),
+    date_buy: z.coerce
+      .date()
+      .max(new Date(), { message: "Data superior a data atual" }),
+    date_end: z.coerce.date(),
+  })
+  .refine((fields) => fields.date_end > fields.date_buy, {
+    path: ["date_end"],
+    message: "Data menor que a data de compra",
+  });
 
 export type formSchemaType = typeof formSchema;
 
 export function NewItemForm() {
+  const { createNewItem } = useContext(InventoryContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   function handleSubmitForm(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    createNewItem(values);
   }
 
   return (
@@ -124,6 +128,15 @@ export function NewItemForm() {
                 type="number"
               />
 
+              <InputDialog
+                nameInput="value_un"
+                label="Valor unitario"
+                controlInput={form.control}
+                type="number"
+              />
+            </div>
+
+            <div className="flex gap-2">
               <FormField
                 control={form.control}
                 name="state"
@@ -155,21 +168,6 @@ export function NewItemForm() {
             </div>
 
             <div className="flex gap-2">
-              <InputDialog
-                nameInput="value_un"
-                label="Valor unitario"
-                controlInput={form.control}
-                type="number"
-              />
-              <InputDialog
-                nameInput="value_total"
-                label="Valor total"
-                controlInput={form.control}
-                type="number"
-              />
-            </div>
-
-            <div className="flex gap-2">
               <FormField
                 control={form.control}
                 name="department"
@@ -184,7 +182,7 @@ export function NewItemForm() {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Selecione o departamento" />
+                          <SelectValue />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -210,7 +208,7 @@ export function NewItemForm() {
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormLabel>
-                      <span>Grupo</span>
+                      <span>Unidade</span>
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -218,7 +216,7 @@ export function NewItemForm() {
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Selecione o grupo" />
+                          <SelectValue />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
