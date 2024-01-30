@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { api } from "../services/api";
+import { useLocation } from "react-router-dom";
 
 export interface Items {
   id: string;
@@ -34,12 +35,18 @@ interface InventoryContextProviderProps {
 
 export function InventoryContextProvider({ children }: InventoryContextProviderProps) {
   const [items, setItems] = useState<Items[]>([]);
+  let { search } = useLocation();
+
+  if(!search) {
+    search = "all"
+  }
 
   useEffect(() => {
     api
-      .get("http://localhost:3333/inventorys")
-      .then((response) => setItems(response.data));
-  }, []);
+      .get(`http://localhost:3333/inventorys${search}`)
+      .then((response) => setItems(response.data)); 
+  }, [search]);
+  
 
   function createNewItem (item: CreateNewItem)  {
     api.post("http://localhost:3333/inventorys", item);

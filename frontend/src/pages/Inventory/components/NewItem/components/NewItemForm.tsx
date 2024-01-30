@@ -90,7 +90,10 @@ export function NewItemForm() {
                         <SelectItem value="monitor">Monitor</SelectItem>
                         <SelectItem value="memoria ram">Memoria Ram</SelectItem>
                         <SelectItem value="processador">Processador</SelectItem>
+                        <SelectItem value="placa_video">Placa de video</SelectItem>
                         <SelectItem value="ssd/hdd">SSD/HDD</SelectItem>
+                        <SelectItem value="cameras">Câmeras</SelectItem>
+                        <SelectItem value="cabos">Cabos</SelectItem>
                         <SelectItem value="outros">Outros</SelectItem>
                       </SelectContent>
                     </Select>

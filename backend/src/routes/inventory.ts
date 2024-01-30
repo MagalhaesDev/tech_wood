@@ -3,10 +3,19 @@ import { prisma } from "../lib/prisma";
 import { z } from "zod";
 
 export async function inventoryRoutes(app: FastifyInstance) {
-  app.get("/inventorys", async () => {
-    const inventorys = await prisma.inventorys.findMany();
-
-    return inventorys;
+  app.get("/inventorys", async (req ,res) => {
+    const { param }: any = req.query;
+    if(param === "all") {
+      const inventorys = await prisma.inventorys.findMany();
+      return inventorys;
+    } else {
+      const inventorys = await prisma.inventorys.findMany({
+        where: {
+          grup: param,
+        },
+      });
+      return inventorys;
+    }   
   });
 
   app.post("/inventorys", async (request, response) => {

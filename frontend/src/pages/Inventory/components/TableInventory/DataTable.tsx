@@ -16,7 +16,6 @@ import {
   import { Input } from "../../../../components/ui/input";
   import { Button } from "../../../../components/ui/button";
   import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../../components/ui/table";
-import { NewItem } from "../NewItem";
   
   interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -64,7 +63,6 @@ import { NewItem } from "../NewItem";
             }
             className="max-w-sm"
           />
-          <NewItem />
         </div>
   
         <div>
