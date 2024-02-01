@@ -85,16 +85,16 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="impressora">Impressora</SelectItem>
-                        <SelectItem value="periferico">Periferico</SelectItem>
-                        <SelectItem value="monitor">Monitor</SelectItem>
-                        <SelectItem value="memoria ram">Memoria Ram</SelectItem>
-                        <SelectItem value="processador">Processador</SelectItem>
-                        <SelectItem value="placa_video">Placa de video</SelectItem>
-                        <SelectItem value="ssd/hdd">SSD/HDD</SelectItem>
-                        <SelectItem value="cameras">Câmeras</SelectItem>
-                        <SelectItem value="cabos">Cabos</SelectItem>
-                        <SelectItem value="outros">Outros</SelectItem>
+                        <SelectItem value="Impressora">Impressora</SelectItem>
+                        <SelectItem value="Periferico">Periferico</SelectItem>
+                        <SelectItem value="Monitor">Monitor</SelectItem>
+                        <SelectItem value="Memoria Ram">Memoria Ram</SelectItem>
+                        <SelectItem value="Processador">Processador</SelectItem>
+                        <SelectItem value="Placa de video">Placa de video</SelectItem>
+                        <SelectItem value="SSD/HDD">SSD/HDD</SelectItem>
+                        <SelectItem value="Câmeras">Câmeras</SelectItem>
+                        <SelectItem value="Cabos">Cabos</SelectItem>
+                        <SelectItem value="Outros">Outros</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -158,11 +158,11 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="terrible">Pessimo</SelectItem>
-                        <SelectItem value="bad">Ruim</SelectItem>
-                        <SelectItem value="good">Bom</SelectItem>
-                        <SelectItem value="very_good">Muito Bom</SelectItem>
-                        <SelectItem value="great">Excelente</SelectItem>
+                        <SelectItem value="Pessimo">Pessimo</SelectItem>
+                        <SelectItem value="Ruim">Ruim</SelectItem>
+                        <SelectItem value="Bom">Bom</SelectItem>
+                        <SelectItem value="Muito Bom">Muito Bom</SelectItem>
+                        <SelectItem value="Excelente">Excelente</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -192,14 +192,14 @@ export function NewItemForm() {
                         <SelectItem value="Administrativo">
                           Administrativo
                         </SelectItem>
-                        <SelectItem value="budget">Orçamento</SelectItem>
-                        <SelectItem value="technician">Dep Tecnico</SelectItem>
-                        <SelectItem value="quality">Qualidade</SelectItem>
-                        <SelectItem value="production">Produção</SelectItem>
-                        <SelectItem value="receipt">Recebimento</SelectItem>
-                        <SelectItem value="financial">Financeiro</SelectItem>
-                        <SelectItem value="expedition">Expedição</SelectItem>
-                        <SelectItem value="rh">R.H</SelectItem>
+                        <SelectItem value="Orçamento">Orçamento</SelectItem>
+                        <SelectItem value="Dep Tecnico">Dep Tecnico</SelectItem>
+                        <SelectItem value="Qualidade">Qualidade</SelectItem>
+                        <SelectItem value="Produção">Produção</SelectItem>
+                        <SelectItem value="Recebimento">Recebimento</SelectItem>
+                        <SelectItem value="Financeiro">Financeiro</SelectItem>
+                        <SelectItem value="Expedição">Expedição</SelectItem>
+                        <SelectItem value="R.H">R.H</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>
@@ -223,9 +223,9 @@ export function NewItemForm() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="woodpel">Woodpel</SelectItem>
-                        <SelectItem value="life">Life</SelectItem>
-                        <SelectItem value="woodflex">Woodflex</SelectItem>
+                        <SelectItem value="Woodpel">Woodpel</SelectItem>
+                        <SelectItem value="Life">Life</SelectItem>
+                        <SelectItem value="Woodflex">Woodflex</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>

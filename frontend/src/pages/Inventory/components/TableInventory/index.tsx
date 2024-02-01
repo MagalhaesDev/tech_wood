@@ -6,6 +6,5 @@ import { InventoryContext } from "../../../../contexts/InventoryContenxt";
 export function TableInventory() {
   const { items } = useContext(InventoryContext);
 
-
   return <DataTableInventory columns={columns} data={items} />;
 }

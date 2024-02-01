@@ -45,10 +45,6 @@ export async function inventoryRoutes(app: FastifyInstance) {
 
     const item = paramsBody.parse(request.body);
 
-    item.marca = item.marca.toLocaleLowerCase().charAt(0).toUpperCase();
-    item.model = item.marca.toLocaleLowerCase().charAt(0).toUpperCase();
-    item.description = item.marca.toLocaleLowerCase().charAt(0).toUpperCase() + item.marca.slice(1);
-
     try {
       await prisma.inventorys.create({  
         data: {
@@ -57,11 +53,9 @@ export async function inventoryRoutes(app: FastifyInstance) {
         },
       });
 
-      console.log("foi")
-
       return response.status(200);
     } catch (err) {
-      return response.status(500).send("erroooo");
+      return response.status(500);
     }
   });
 }

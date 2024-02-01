@@ -25,70 +25,70 @@ export function Inventory() {
         <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
           <NewItem />
         </button>
-        <NavLink to={`/inventory?param=impressora`}>
+        <NavLink to={`/inventory?param=Impressora`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Printer size={48} />
             <p>Impressoras</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=periferico`}>
+        <NavLink to={`/inventory?param=Periferico`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Mouse size={48} />
             <p>Periféricos</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=monitor`}>
+        <NavLink to={`/inventory?param=Monitor`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Monitor size={48} />
             <p>Monitores</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=memoria_ram`}>
+        <NavLink to={`/inventory?param=Memoria Ram`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <MemoryStick size={48} />
             <p>Memoria Ram</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=processador`}>
+        <NavLink to={`/inventory?param=Processador`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Cpu size={48} />
             <p>Processador</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=placa_video`}>
+        <NavLink to={`/inventory?param=Placa de video`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <HdmiPort size={48} />
             <p>Placa de video</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=ssd/hdd`}>
+        <NavLink to={`/inventory?param=SSD/HDD`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <HardDrive size={48} />
             <p>HDD/SSD</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=cameras`}>
+        <NavLink to={`/inventory?param=Câmeras`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Video size={48} />
             <p>Câmeras</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=cabos`}>
+        <NavLink to={`/inventory?param=Cabos`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <Cable size={48} />
             <p>Cabos</p>
           </button>
         </NavLink>
 
-        <NavLink to={`/inventory?param=outros`}>
+        <NavLink to={`/inventory?param=Outros`}>
           <button className="w-48 h-48 border-2 border-green-900 flex flex-col gap-2 justify-center items-center rounded-md text-zinc-300 font-bold text-lg hover:bg-[#131313] hover:border-green-800 transition ease-in .3s">
             <MoreHorizontal size={48} />
             <p>Outros</p>
