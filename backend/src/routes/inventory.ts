@@ -45,6 +45,10 @@ export async function inventoryRoutes(app: FastifyInstance) {
 
     const item = paramsBody.parse(request.body);
 
+    function generatorQRCODE () {
+      const one = item.unit.slice(0,1) + item.grup.slice(0,1) + item.department.slice(0,1) + ticketItem;
+    }
+
     try {
       await prisma.inventorys.create({  
         data: {
