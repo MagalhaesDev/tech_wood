@@ -1,12 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "../../../../../components/ui/dialog";
+
 import {
   Form,
   FormControl,
@@ -24,6 +19,7 @@ import { api } from "../../../../../services/api";
 import { useContext } from "react";
 import { TasksContext } from "../../../../../contexts/TasksContext";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../components/ui/select";
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../../../components/ui/dialog";
 
 const FormSchema = z.object({
   priority: z.string(),
@@ -68,7 +64,7 @@ export function AcceptedHelp({ columnId }: AcceptedHelpProps) {
       problem: data.problem
     };
 
-    api.put("http://192.168.15.141:3000/tasks/priority", updatePriority);
+    api.put("http://192.168.15.41:3000/tasks/priority", updatePriority);
 
     window.location.reload();
   }

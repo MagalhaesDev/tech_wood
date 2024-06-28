@@ -1,44 +1,34 @@
 import {
+  BarChart,
   Computer,
-  AlignEndHorizontal,
-  Bell,
-  CircleDollarSign,
-  Trophy,
-  Truck,
 } from "lucide-react";
-import imgLogo from "../../assets/logo.svg";
+import logo from "../../assets/woodpel.png"
+import { Separator } from "../ui/separator"
+
 import { NavLink } from "react-router-dom";
 
 export function Header() {
   return (
-    <div className="bg-zinc-900  p-3 h-screen fixed flex flex-col justify-between p-4">
-      <img src={imgLogo} width={24} alt="logo" className="cursor-pointer" />
-      <div>
-        <div className="flex flex-col gap-6 items-center justify-center">
-          <NavLink to={`/inventoryall`}>
-            <div className="cursor-pointer hover:text-green-700 transition ease-in">
-              <Truck size={24} />
+    <div>
+      <div className="py-4  w-full px-16">
+        <img src={logo} className="w-32" alt="" />
+      </div>
+      <Separator />
+      <div className="flex justify-center py-4">
+          <NavLink to={`/`}>
+            <div className="font-light cursor-pointer text-zinc-100  border-2 border-green-500  transition ease-in flex gap-2 items-center bg-green-500 px-3 py-1 rounded-l-lg">
+              <h2>Helpdesk</h2>
+              <Computer strokeWidth={2} size={18} />
             </div>
           </NavLink>
-          <NavLink to={`/helpdesk`}>
-            <div className="cursor-pointer hover:text-green-700 transition ease-in">
-              <Computer size={24} />
+          <NavLink to={`/graficos`}>
+          <div className="font-light cursor-pointer text-zinc-900 hover:bg-green-200 hover:text-green-400  transition ease-in flex gap-2 items-center border-2 border-green-100 px-3 py-1 rounded-r-lg">
+              <h2>KPIs</h2>
+              <BarChart size={18} strokeWidth={2}/>
             </div>
           </NavLink>
-          <div className="cursor-pointer hover:text-green-700 transition ease-in">
-            <AlignEndHorizontal size={24} />
-          </div>
-          <div className="cursor-pointer hover:text-green-700 transition ease-in">
-            <CircleDollarSign size={24} />
-          </div>
-          <div className="cursor-pointer hover:text-green-700 transition ease-in">
-            <Trophy size={24} />
-          </div>
-        </div>
-      </div>
-      <div className="cursor-pointer hover:text-green-700 transition ease-in">
-        <Bell size={24} />
-      </div>
+    </div>
     </div>
   );
 }
+

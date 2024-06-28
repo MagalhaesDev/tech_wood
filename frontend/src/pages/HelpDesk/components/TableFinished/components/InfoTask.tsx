@@ -43,38 +43,28 @@ export function InfoTask({ columnId }: AcceptedHelpProps) {
 
 
   return (
-    <DialogContent className="sm:max-w-[425px] flex flex-col items-center">
-      <DialogHeader>
-        <DialogTitle>
-          <div className="flex items-center gap-8 text-center justify-center">
-            <h1 className="text-xl text-green-600">{taskActually?.name}</h1>
+    <DialogContent className="flex flex-col">
+    <DialogHeader>
+      <DialogTitle>
+        <h1>{taskActually?.name}</h1>
+      </DialogTitle>
+      <DialogDescription>
+        <div className="flex flex-col gap-6 mt-6">
+          <div>
+            <h2 className="text-stone-900">Descrição:</h2>
+            <p> {taskActually?.description}</p>
           </div>
-        </DialogTitle>
-        <DialogDescription>
-          <div className="flex flex-col gap-3">
-            <div>
-              <h2 className="text-green-400 font-bold text-[1rem]">
-                Descrição:
-              </h2>
-              <p> {taskActually?.description}</p>
-            </div>
-            <div>
-              <h2 className="text-green-400 font-bold text-[1rem]">
-                Data e hora da conclusão:
-              </h2>
-              <p className="text-sm text-zinc-400">{formattedDate}</p>
-            </div>
-            <div>
-              <h2 className="text-green-400 font-bold text-[1rem]">
-                Tempo de serviço
-              </h2>
-              <p className="text-sm text-zinc-400">
-                25 Minutos
-              </p>
-            </div>
+          <div>
+            <h2 className="text-stone-900">Data e hora da conclusão:</h2>
+            <p className="text-sm text-zinc-400">{formattedDate}</p>
           </div>
-        </DialogDescription>
-      </DialogHeader>
-    </DialogContent>
+          <div>
+            <h2 className="text-stone-900">Tempo de serviço</h2>
+            <p className="text-sm text-zinc-400">25 Minutos</p>
+          </div>
+        </div>
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
   );
 }
